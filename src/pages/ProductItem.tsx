@@ -57,6 +57,7 @@ const ProductItem = () => {
   const images = [
     'https://via.placeholder.com/150',
     'https://via.placeholder.com/300',
+    'https://via.placeholder.com/450',
     'https://via.placeholder.com/450'
   ];
 
