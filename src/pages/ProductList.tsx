@@ -1,5 +1,7 @@
-import { Button, Card, CardActions, CardContent, ImageListItem, Link, Rating, Typography } from "@mui/material";
+import { Button, ButtonGroup, Card, CardActions, CardContent, ImageListItem, Rating, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import  ProductItem  from './ProductItem';
+import { Link } from "react-router-dom";
 
 export const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -24,69 +26,86 @@ export const ProductList = () => {
     marginTop: '100px',
     flexWrap: 'wrap'
   };
-  const titleProducts = {
-    width: '100%',
-    textAlign: 'center'
-  };
-  const productItemStyle = {
-    width: '32%',
-    margin: 'auto',
-    textAlign: 'center'
+
+  const styles = {
+    productsStyle: {
+      color: 'white',
+      padding: '5px',
+      display: 'flex',
+      marginTop: '100px',
+      flexWrap: 'wrap'
+    },
+  
+    titleProducts: {
+      width: '100%',
+      textAlign: 'center'
+    },
+    productItemStyle: {
+      width: '32%',
+      margin: 'auto',
+      textAlign: 'center'
+      
+    },
     
-  };
-  const button = {
-    width: '100%',
-    backgroundColor: 'blue',
-    padding: '0'
-    
-  };
+    button: {
+      color: 'white',
+      textDecoration: 'none',
+      margin: '10px', 
+      padding: '5px 25px',
+      fontSize: '20px'
+      
+    }
+  }
   
   return (
-    <div style={productsStyle}>
-      <h1 style={titleProducts}>Productos</h1>
-      {products.map((product: any) => (
-        <div key={product.id} style={productItemStyle}>
-   
-      <Card sx={{ maxWidth: 345 }} key={product.id}>
-      
-      <CardContent >
-        <ImageListItem key={product.img}>
-          <img
-            src={`${product.image}`}
-            srcSet={`${product.image}`}
-            alt={product.name}
-            loading="lazy"
-          />
-        </ImageListItem>
-        <Typography gutterBottom variant="h5" component="div">
-        {product.name}
-        </Typography>
-        
-        
-        <p> {product.description}</p>
+    <div style={styles.productsStyle}>
+      <h1 style={styles.titleProducts}>Productos</h1>
 
-        <Typography variant="h5" component="h2">
-        $ {product.price}
-        </Typography>
-        <Typography component="legend">Controlled</Typography>
-        <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-        
-      </CardContent>
-      <CardActions>
-        {/* <Button>Buy Now
-          <a href="{"></a>
-        <Link to={`/products/${product.id}`}></Link>
-        </Button> */}
-        <Link to={`/products/${product.id}`} style={button}>
-        <Button variant="text">Buy Now</Button>
-        </Link>
-        {/* <Link to={`/products/${product.id}`}>{product.name}</Link> */}
-      </CardActions>
-    </Card>
 
-        </div>
-        
-      ))}
+      {products.map((product: any) => {
+        return (
+          <div key={product.id} style={styles.productItemStyle}>
+
+            <Card sx={{ maxWidth: 345 }} key={product.id}>
+
+              <CardContent>
+                <ImageListItem key={product.img}>
+                  <img
+                    src={`${product.image}`}
+                    srcSet={`${product.image}`}
+                    alt={product.name}
+                    loading="lazy" />
+                </ImageListItem>
+                <Typography gutterBottom variant="h5" component="div">
+                  {product.name}
+                </Typography>
+
+
+                <p> {product.description}</p>
+
+                <Typography variant="h5" component="h2">
+                  $ {product.price}
+                </Typography>
+                <Typography component="legend">Controlled</Typography>
+                <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+
+              </CardContent>
+              <CardActions style={{background: product.color}}>
+                
+                
+                <Link to={`/products/${product.id}`} style={styles.button}>Mas</Link>
+                <Link to={`/products/`} style={styles.button}>Comprar</Link>
+                
+            
+                
+              </CardActions>
+              
+            </Card>
+
+          </div>
+
+        );
+      })}
     </div>
   )
 }
